@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}  Parc a Vélo{% endblock %}
+{% block body %}
+    <div class="container mt-5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand text-danger" href="#">Paramètres</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Classe
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('entre_eleve')}}"> Toutes les classes</a>
+                            {% for classDetail in class %}
+                                <a class="dropdown-item" href="{{ path('entre_eleve_orderClass',{'class': classDetail['classe']}) }}"> {{ classDetail['classe'] }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+
+                </ul>
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Chercher">
+                    <button class="btn btn-outline-dark" type="submit">Chercher</button>
+                </form>
+            </div>
+        </nav>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr class="tr-head">
+                <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+                <th scope="col">Classe</th>
+                <th scope="col">Date j/m/a</th>
+                <th scope="col">Heure</th>
+                <th scope="col">Vélo</th>
+            </tr>
+            </thead>
+                <tbody>
+                {% for entre in entres %}
+                    <tr class="tr-body">
+                        <td> {{ entre.eleve.nom }} {{ entre.refus }}</td>
+                        <td> {{ entre.eleve.prenom }}</td>
+                        <td> {{ entre.eleve.classe }}</td>
+                        <td>{{ entre.date |format_datetime('short', 'none') }}</td>
+                        <td>{{ entre.date|format_datetime('none', 'short') }}</td>
+                        <td>
+                            {% if entre.velo %}
+                                <img src="{{ asset('logo/bike.png') }}" alt="logo Lycee">
+                            {% else %}
+                                <img src="{{ asset('logo/man-user.png') }}" alt="no velo">
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock %}

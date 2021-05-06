@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}  Parc a Vélo{% endblock %}
+{% block body %}
+    <div class="container mt-5 ">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr class="tr-head">
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prenom</th>
+                        <th scope="col">Classe</th>
+                        <th scope="col">Code RFID</th>
+                        <th scope="col">Code-Barres</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                    {% for eleve in eleves %}
+                        <tr class="tr-body">
+                            <td>{{ eleve.nom }}</td>
+                            <td>{{ eleve.prenom }}</td>
+                            <td>{{ eleve.classe }}</td>
+                            <td>{{ eleve.codeRFID }}</td>
+                            <td>{{ eleve.codeBarre }}</td>
+                            <td> <img src="{{asset('images/eleves/'~eleve.image)}}" alt=" Image éleve" class="img-fluid"></td>
+                            <td class="d-flex flex-column">
+                                <a href="{{ path('eleve_show_liste', {'id': eleve.id}) }}" class="btn btn-primary">Détails</a>
+                                <a href="{{ path('eleve_edit', {'id': eleve.id}) }}" class="btn btn-success mt-1"> Editer</a>
+                                <a href="{{ path('eleve_delete', {'id': eleve.id}) }}" class="btn btn-danger mt-1">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+
+    </div>
+
+{% endblock %}

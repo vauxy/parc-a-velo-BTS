@@ -1,0 +1,25 @@
+.tr-body {
+    width: 100%;
+    display: inline-table;
+    table-layout: fixed;
+}
+.tr-head {
+
+}
+th {
+    width: 154px;
+}
+table{
+    height:70%;
+}
+tbody{
+    overflow-y: scroll;
+    height: 65%;
+    width: 1100px;
+    position: absolute;
+}
+
+img{
+    width: 130.7px;
+    height: 130.7px;
+}

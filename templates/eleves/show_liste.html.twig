@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Eleve{% endblock %}
+
+{% block body %}
+
+ <h3 class="p-3 mb-2 bg-primary text-white text-center">{{ eleve.nom }} {{ eleve.prenom }} {{ eleve.classe }} <img src="{{asset('images/eleves/'~eleve.image)}}" width="130.7" height="130.7" alt=" Image éleve"> </h3>
+    <div class="container">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr class="tr-head">
+                    <th scope="col">Date</th>
+                    <th scope="col">Heure</th>
+                    <th scope="col">Vélo</th>
+                </tr>
+                </thead>
+                    <tbody>
+                    {% for entre in entres %}
+
+                        {% if entre.refus %}
+                            <tr class="table-danger tr-body">
+                        {% else %}
+                            <tr class="table-success tr-body">
+                        {% endif %}
+                        <td>{{ entre.date |format_datetime('short', 'none') }}</td>
+                        <td> {{ entre.date |format_datetime('none', 'short') }}</td>
+                        <td>
+                            {% if entre.velo %}
+                                <img src="{{ asset('logo/bike.png') }}" alt="velo">
+                            {% else %}
+                                <img src="{{ asset('logo/man-user.png') }}" alt="no velo">
+                            {% endif %}
+                        </td>
+                        </tr>
+                    {% endfor %}
+
+                    {% for sortie in sorties %}
+
+                        {% if sortie.refus %}
+                            <tr class="table-danger tr-body">
+                        {% else %}
+                            <tr class="table-primary tr-body">
+                        {% endif %}
+                        <td> {{ sortie.date |format_datetime('short', 'none') }}</td>
+                        <td> {{ sortie.date |format_datetime('none', 'short') }}</td>
+                        <td>
+                            {% if sortie.velo %}
+                                <img src="{{ asset('logo/bike.png') }}" alt="logo Lycee">
+                            {% else %}
+                                <img src="{{ asset('logo/man-user.png') }}" alt="no velo">
+                            {% endif %}
+                        </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+        </div>
+    <a href="{{ path('eleve_index') }}">Retour</a>
+{% endblock %}
