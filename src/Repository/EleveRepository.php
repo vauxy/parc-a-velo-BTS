@@ -37,6 +37,27 @@ class EleveRepository extends ServiceEntityRepository
 
     }
 
+    /**
+     *
+     */
+    public function findByClassEleve(string $classe)
+    {
+
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT el
+            FROM App\Entity\Eleve el
+            WHERE el.classe = :classe
+            ')->setParameter('classe', $classe)
+            ;
+
+        return $query->getResult();
+
+    }
+
+
+
     // /**
     //  * @return Eleve[] Returns an array of Eleve objects
     //  */

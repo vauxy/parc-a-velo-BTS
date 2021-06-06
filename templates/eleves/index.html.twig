@@ -2,7 +2,31 @@
 
 {% block title %}  Parc a Vélo{% endblock %}
 {% block body %}
-    <div class="container mt-5 ">
+    <div class="container  ">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand text-danger" href="#">Paramètres</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Classe
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('eleve_index')}}"> Toutes les classes</a>
+
+                            {% for classDetail in class %}
+                                <a class="dropdown-item" href="{{ path('eleve_orderClass',{'class': classDetail['classe']}) }}"> {{ classDetail['classe'] }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
             <table class="table table-striped">
                 <thead class="thead-dark">
                     <tr class="tr-head">
@@ -27,14 +51,15 @@
                             <td class="d-flex flex-column">
                                 <a href="{{ path('eleve_show_liste', {'id': eleve.id}) }}" class="btn btn-primary">Détails</a>
                                 <a href="{{ path('eleve_edit', {'id': eleve.id}) }}" class="btn btn-success mt-1"> Editer</a>
-                                <a href="{{ path('eleve_delete', {'id': eleve.id}) }}" class="btn btn-danger mt-1">Supprimer</a>
+
+{#                                {%  if eleve.entres[0].date is null and eleve.sortie[0].date is null %}#}
+{#                                    <a href="{{ path('eleve_delete', {'id': eleve.id}) }}" class="btn btn-danger mt-1">Supprimer</a>#}
+{#                                {% endif %}#}
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-
-
     </div>
 
 {% endblock %}

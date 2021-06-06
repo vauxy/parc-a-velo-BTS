@@ -19,11 +19,15 @@ class EleveController extends AbstractController
 {
     /**
      * @Route("/", name="eleve_index", methods={"GET"})
+     * @param EleveRepository $eleveRepository
+     * @return Response
      */
     public function index(EleveRepository $eleveRepository): Response
     {
+
         return $this->render('eleves/index.html.twig', [
             'eleves' => $eleveRepository->findAll(),
+            'class' => $eleveRepository->findAllClass()
         ]);
     }
 
@@ -45,7 +49,7 @@ class EleveController extends AbstractController
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -78,12 +82,12 @@ class EleveController extends AbstractController
     /**
      * @Route("/{id}", name="eleve_show", methods={"GET"})
      */
-    public function show(Eleve $eleve): Response
+    /*public function show(Eleve $eleve): Response
     {
         return $this->render('eleves/show.html.twig', [
             'eleve' => $eleve,
         ]);
-    }
+    }*/
 
     /**
      * @Route("/{id}/edit", name="eleve_edit", methods={"GET","POST"})
@@ -110,7 +114,7 @@ class EleveController extends AbstractController
      */
     public function delete(Request $request, Eleve $eleve): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$eleve->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $eleve->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($eleve);
             $entityManager->flush();
@@ -118,4 +122,16 @@ class EleveController extends AbstractController
 
         return $this->redirectToRoute('eleve_index');
     }
+
+    /**
+     * @Route("/elevesorderByClass/{class}", name="eleve_orderClass")
+     */
+    public function eleveOrderByClass($class, EleveRepository $eleveRepository): Response
+    {
+        return $this->render('eleves/index.html.twig', [
+            'eleves' => $eleveRepository->findByClassEleve($class),
+            'class' => $eleveRepository->findAllClass()
+        ]);
+    }
+
 }
