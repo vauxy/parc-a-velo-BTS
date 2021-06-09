@@ -3,7 +3,7 @@
 
 {% block title %}  Parc a Vélo{% endblock %}
 {% block body %}
-    <div class="container mt-5">
+    <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand text-danger" href="#">Paramètres</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,10 +26,6 @@
                     </li>
 
                 </ul>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Chercher">
-                    <button class="btn btn-outline-dark" type="submit">Chercher</button>
-                </form>
             </div>
         </nav>
         <table class="table table-striped">
@@ -41,6 +37,7 @@
                 <th scope="col">Date j/m/a</th>
                 <th scope="col">Heure</th>
                 <th scope="col">Vélo</th>
+                <th scope="col">Image</th>
             </tr>
             </thead>
                 <tbody>
@@ -58,6 +55,7 @@
                                 <img src="{{ asset('logo/man-user.png') }}" alt="no velo">
                             {% endif %}
                         </td>
+                        <td><img src="{{asset('images/eleves/'~entre.photo)}}" alt=" Image éleve" class="img-fluid"></td>
                     </tr>
                 {% endfor %}
                 </tbody>

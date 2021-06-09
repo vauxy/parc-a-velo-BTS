@@ -3,16 +3,14 @@
 {% block title %}  Parc a Vélo{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
+    <div class="container ">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand text-danger" href="#">Paramètre</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Classe
@@ -24,12 +22,7 @@
                             {% endfor %}
                         </div>
                     </li>
-
                 </ul>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Chercher">
-                    <button class="btn btn-outline-dark" type="submit">Chercher</button>
-                </form>
             </div>
         </nav>
 
@@ -42,6 +35,7 @@
                     <th scope="col">Date j/m/a</th>
                     <th scope="col">Heure</th>
                     <th scope="col">Vélo</th>
+                    <th scope="col">Image</th>
                 </tr>
                 </thead>
 
@@ -54,6 +48,7 @@
                             <td>{{ refus.date |format_datetime('short', 'none') }}</td>
                             <td>{{ refus.date|format_datetime('none', 'short') }}</td>
                             <td>{{ refus.codeRfidRefus }}</td>
+                            <td><img src="{{asset('images/eleves/'~refus.photo)}}" alt=" Image éleve" class="img-fluid"></td>
 
 
                         </tr>
@@ -66,6 +61,7 @@
                             <td>{{ refus.date |format_datetime('short', 'none') }}</td>
                             <td>{{ refus.date|format_datetime('none', 'short') }}</td>
                             <td>{{ refus.codeRfidRefus }}</td>
+                            <td><img src="{{asset('images/eleves/'~refus.photo)}}" alt=" Image éleve" class="img-fluid"></td>
                         </tr>
                     {% endfor %}
                     </tbody>

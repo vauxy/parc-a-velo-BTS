@@ -51,10 +51,6 @@
                             <td class="d-flex flex-column">
                                 <a href="{{ path('eleve_show_liste', {'id': eleve.id}) }}" class="btn btn-primary">Détails</a>
                                 <a href="{{ path('eleve_edit', {'id': eleve.id}) }}" class="btn btn-success mt-1"> Editer</a>
-
-{#                                {%  if eleve.entres[0].date is null and eleve.sortie[0].date is null %}#}
-{#                                    <a href="{{ path('eleve_delete', {'id': eleve.id}) }}" class="btn btn-danger mt-1">Supprimer</a>#}
-{#                                {% endif %}#}
                             </td>
                         </tr>
                     {% endfor %}
